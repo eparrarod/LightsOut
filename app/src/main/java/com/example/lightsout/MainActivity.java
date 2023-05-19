@@ -15,6 +15,22 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout grid;
     private boolean cellState [][];
 
+    View.OnClickListener buttonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int buttonIndex = grid.indexOfChild(v);
+            int row = buttonIndex / GRID_SIZE;
+            int col = buttonIndex % GRID_SIZE;
+
+            cellState[row][col] = !cellState[row][col];
+            if(cellState[row][col] == true){
+                v.setBackgroundColor(getColor(R.color.blue_500));
+            }else{
+                v.setBackgroundColor(getColor(R.color.black));
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         grid = findViewById(R.id.light_grid);
 
+        for(int i =0; i < grid.getChildCount(); i++){
+            grid.getChildAt(i).setOnClickListener(buttonClick);
+        }
 //      randomize();
 
         recolor();
