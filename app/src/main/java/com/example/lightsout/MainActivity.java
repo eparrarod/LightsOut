@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -13,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int GRID_SIZE = 3;
     private GridLayout grid;
-    private boolean cellState [][];
+    private TextView counterLabel;
+    private boolean[][] cellState;
 
     View.OnClickListener buttonClick = new View.OnClickListener() {
         @Override
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 v.setBackgroundColor(getColor(R.color.black));
             }
+            updateCounterLabel();
         }
     };
 
@@ -38,16 +41,19 @@ public class MainActivity extends AppCompatActivity {
         cellState = new boolean[][]{{true, true, true}, {true, true, true}, {true, true, true}};
 
         setContentView(R.layout.activity_main);
-        grid = findViewById(R.id.light_grid);
+        grid = findViewById(R.id.lightGrid);
+        counterLabel = findViewById(R.id.countLabel);
 
         for(int i =0; i < grid.getChildCount(); i++){
             grid.getChildAt(i).setOnClickListener(buttonClick);
         }
-//      randomize();
-
+        randomize();
         recolor();
     }
 
+    /**
+     * Method that sets the color or all the buttons based on their corresponding value in the cellState matrix
+     */
     public void recolor(){
         for (int i = 0; i < grid.getChildCount(); i++) {
             Button gridButton = (Button) grid.getChildAt(i);
@@ -64,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to randomly set the values of each item
+     * in the cellState matrix indicating the color for each button
+     */
     public void randomize(){
         Random random = new Random();
         for(int i =0; i< GRID_SIZE; i++){
@@ -71,8 +81,34 @@ public class MainActivity extends AppCompatActivity {
                 cellState[i][j] = random.nextBoolean();
             }
         }
+        updateCounterLabel();
     }
 
+    public void reset(View v){
+//        Log.d("A", grid.toString());
+//        if(grid != null) {
+            randomize();
+            recolor();
+//        }else{
+//            Log.d("A", "null grid");
+//        }
+    }
+
+    public void updateCounterLabel(){
+        String text = String.format(getString(R.string.score), counter());
+        counterLabel.setText(text);
+    }
+    public int counter(){
+        int count = 0;
+        for(int i =0; i< GRID_SIZE; i++){
+            for(int j =0; j< GRID_SIZE; j++){
+                if(cellState[i][j] == true){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
 
 }

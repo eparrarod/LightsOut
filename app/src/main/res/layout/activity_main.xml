@@ -7,10 +7,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/head_label"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +19,7 @@
         app:layout_constraintVertical_bias="0.127" />
 
     <GridLayout
-        android:id="@+id/light_grid"
+        android:id="@+id/lightGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -49,5 +50,28 @@
 
         <Button style="@style/LightButton" />
     </GridLayout>
+
+    <TextView
+        android:id="@+id/countLabel"
+        android:layout_width="88dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/score_0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lightGrid" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:onClick="reset"
+        android:text="@string/reset_label"
+        app:layout_constraintStart_toStartOf="@+id/lightGrid"
+        app:layout_constraintTop_toBottomOf="@+id/countLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

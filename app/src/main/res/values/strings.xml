@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LightsOut</string>
+    <string name="score_0">Score: 0</string>
+    <string name="reset_label">Reset</string>
+    <string name="score">Score: %1$d</string>
+    <string name="head_label">Lights - Esteban</string>
 </resources>
